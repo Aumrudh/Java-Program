@@ -1,0 +1,284 @@
+//JDBC using CUI
+//PROGRAMMED BY AUMRUDH LAL KUMAR TJ
+
+
+PGM 1 - Employee
+
+import java.util.Scanner;
+import java.sql.*;
+import static java.lang.System.*;
+
+public class Emp{
+  public static void main(String args[])throws Exception  {
+    try{
+	  Scanner input=new Scanner(System.in);
+	  Class.forName("com.mysql.cj.jdbc.Driver");
+	  Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/employee","root","Jeyakumar28");
+	  Statement smt=conn.createStatement();
+	  for(;;)	  {
+	    System.out.println("Enter your choice:");
+		System.out.println("1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit");
+		int ch=input.nextInt();
+		if(ch==1)		{
+		  System.out.println("Enter employee details");
+		  String name,city,desig,sql0;
+		  int pno,id;
+		  System.out.print("Enter employee name");
+		  name=input.next();
+		  System.out.print("Enter employee id");
+		  id=input.nextInt();
+		  System.out.print("Enter employee Phoneno");
+		  pno=input.nextInt();
+		  System.out.print("Enter employee city");
+		  city=input.next();
+		  System.out.print("Enter employee department");
+		  desig=input.next();
+		  sql0="INSERT INTO employee VALUES('"+id+"','"+name+"','"+city+"','"+pno+"','"+desig+"')";
+		  smt.executeUpdate(sql0);
+		}
+		else if(ch==2){
+		  System.out.println("Enter employee ID to delete");
+		  int idno=input.nextInt();
+		  String sql1="DELETE FROM Employee WHERE id='"+idno+"'";
+		  smt.executeUpdate(sql1);
+		}
+		else if(ch==3){
+		  System.out.println("Choice"+"\n 1-Name 2-Phoneno");
+		  int choice=input.nextInt();
+		  if(choice==1){
+		    System.out.println("Enter employee id,name to modify");
+			int id_no=input.nextInt();
+			String nam=input.next();
+			String sql2="UPDATE Employee SET Name='"+nam+"' WHERE id='"+id_no+"'";
+			smt.executeUpdate(sql2);
+		  }
+		  if(choice==2){
+		    System.out.println("Enter employee id,name to modify");
+			int ide=input.nextInt();
+			int pno=input.nextInt();
+			String sql3="UPDATE Employee SET Phoneno='"+pno+"' WHERE id='"+ide+"'";
+			smt.executeUpdate(sql3);
+		  }
+		}
+		else if(ch==4){
+		  System.out.println("Enter employee ID to display");
+		  int idnoo=input.nextInt();
+		  String sql4="SELECT * FROM Employee WHERE id='"+idnoo+"'";
+		  ResultSet rs=smt.executeQuery(sql4);
+		  while(rs.next())
+		  {
+		    System.out.println("ID:"+rs.getInt("id")+"\nName:"+rs.getString("name")+"\nPhoneno:"+rs.getInt("pno"));
+		  }
+		}
+		else if(ch==5){
+		  String sql5="SELECT * FROM Employee";
+		  ResultSet rs1=smt.executeQuery(sql5);
+		   while(rs1.next())
+		  {
+		    System.out.println("ID:"+rs1.getInt("id")+"\n Name:"+rs1.getString("name")+"\n Phoneno:"+rs1.getInt("pno"));
+		  }
+		}
+		else{ 
+			break;
+		}
+       }
+    }
+		catch(Exception e){
+		  System.out.println(e);
+		}
+   }
+}
+
+
+output
+
+D:\recent\ex9 java>java Emp
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+1
+Enter employee details
+Enter employee name aumrudh
+Enter employee id 25
+Enter employee Phoneno 966
+Enter employee city madurai
+Enter employee department it
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+4
+Enter employee ID to display
+25
+ID:25
+Name:aumrudh
+Phoneno:966
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+1
+Enter employee details
+Enter employee name kumar
+Enter employee id 34
+Enter employee Phoneno 55
+Enter employee city madurai
+Enter employee department cse
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+5
+ID:25
+ Name:aumrudh
+ Phoneno:966
+ID:34
+ Name:kumar
+ Phoneno:55
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+4
+Enter employee ID to display
+34
+ID:34
+Name:kumar
+Phoneno:55
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+3
+Choice
+ 1-Name 2-Phoneno
+1
+Enter employee id,name to modify
+25 lal
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+5
+ID:25
+ Name:lal
+ Phoneno:966
+ID:34
+ Name:kumar
+ Phoneno:55
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+2
+Enter employee ID to delete
+25
+Enter your choice:
+1-Insert 2-Delete 3-Modify 4-Display1 5-Display2 6-Exit
+5
+ID:34
+Name:kumar
+Phoneno:55
+
+
+PGM 2 - Dictionary
+
+import java.util.Scanner;
+import java.sql.*;
+public class Dictionary{
+  public static void main(String args[])throws Exception{
+    try{
+	  Scanner input=new Scanner(System.in);
+	  Class.forName("com.mysql.cj.jdbc.Driver");
+	  Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Dict?useSSL=FALSE","root","Jeyakumar28");
+	  Statement smt=conn.createStatement();
+	  String sea="jan";
+	  for(;;){
+	    System.out.println("1-Admin 2-User");
+		int ch=input.nextInt();
+		if(ch==1){
+		  System.out.println("1-Insert 2-Delete 3-Display 4-New Words");
+          int c=input.nextInt();
+          if(c==1){
+             System.out.println("Enter wordno,word,meaning");
+             int wno=input.nextInt();
+             String w=input.next();
+             String m=input.next();
+             smt.executeUpdate("INSERT INTO Dict VALUES('"+wno+"','"+w+"','"+m+"')");
+          }
+          else if(c==2)
+          {
+             System.out.println("Enter word to delete");
+			 String wo=input.next();
+			 smt.executeUpdate("DELETE FROM Dict WHERE word='"+wo+"'");
+		  }
+		  else if(c==3){
+			  ResultSet rs=smt.executeQuery("SELECT * FROM Dict");
+			  while(rs.next()){
+				  System.out.println("wordno:"+rs.getInt(1)+"\nWord:"+rs.getString(2)+"\nMeaning:"+rs.getString(3));
+			  }
+		  }
+		  else if(c==4){
+		  	 System.out.print("Enter meaning for word "+sea+" : ");
+			 smt.executeUpdate("UPDATE  Dict SET mean='"+input.next()+"' WHERE word='"+sea+"'");
+		  }
+		}
+		else if(ch==2){
+			System.out.println("Enter search word:");
+			sea=input.next();
+			ResultSet rs2=smt.executeQuery("SELECT * FROM Dict WHERE word='"+sea+"'");
+			if(rs2.next()){
+				System.out.println("Meaning:"+rs2.getString(3));
+			}
+			else{
+				System.out.println("Word Does not exist");
+				System.out.print("Enter word no : ");
+			 	int tw=input.nextInt();
+             	String tm="";
+             	smt.executeUpdate("INSERT INTO Dict VALUES('"+tw+"','"+sea+"','"+tm+"')");
+         	}
+		}
+		else{
+			break;
+		}
+	}
+	catch(Exception e){
+		System.out.println(e);
+	}
+	}
+  }
+}
+
+
+
+output 
+
+D:\recent\ex9 java>java Dictionary
+1-Admin 2-User
+2
+Enter search word:
+it
+Meaning:information
+1-Admin 2-User
+2
+Enter search word:
+cse
+Word Does not exist
+Enter word no : 2
+1-Admin 2-User
+1
+1-Insert 2-Delete 3-Display 4-New Words
+4
+Enter meaning for word cse : computer
+1-Admin 2-User
+1
+1-Insert 2-Delete 3-Display 4-New Words
+3
+wordno:1
+Word:it
+Meaning:information
+wordno:2
+Word:cse
+Meaning:computer
+1-Admin 2-User
+1
+1-Insert 2-Delete 3-Display 4-New Words
+2
+Enter word to delete
+cse
+			
+			  
+
+		  
+		  
+		  
+		
+		
+			
+		  
+		  

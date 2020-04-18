@@ -1,0 +1,288 @@
+
+//Java Ex 7 - Files IO Streams
+//Programmed By Aumrudh Lal Kumar TJ
+
+Pgm1
+
+import java.io.*;
+public class Count{
+        public static void main(String args[]) throws Exception{
+        try{
+                File f=new File("a.txt");
+                FileInputStream fin=new FileInputStream(f);
+                InputStreamReader iin=new InputStreamReader(fin);
+                BufferedReader bin=new BufferedReader(iin);
+                int count=0;
+                String line;
+                String[] word=new String[20];
+                while((line=bin.readLine())!=null){
+                word=line.split(" ");
+                count+=word.length;
+                }
+                fin.close();
+                bin.close();
+                System.out.println("Total Number of words is : "+count);
+        }
+        catch(Exception e){
+           System.out.println(e);
+        }
+}
+}
+
+C:\Users\Aumrudh\Documents>java Count
+Total Number of words is : 2
+
+C:\Users\Aumrudh\Documents>cat a.txt
+Enginneering College
+
+
+pgm2
+
+import java.util.Scanner;
+import java.io.*;
+public class FileScanner
+{
+  public static void main(String args[])throws Exception
+  {
+    try
+    {
+    Scanner ip=new Scanner(new File("in.txt"));
+    int b=ip.nextInt();
+    float d=ip.nextFloat();
+    String s=ip.next();
+    float h=b+d;
+    System.out.println("The integer read is:"+b);
+    System.out.println("The floating point read is:"+d);
+    System.out.println("The String read is:"+s);
+    System.out.println("Hi! Peter,the sum "+b+" + "+d+" is "+h);
+    }
+    catch(Exception e)
+    {
+        System.out.println(e);
+    }
+  }
+}
+
+
+C:\Users\Aumrudh\Documents>javac FileScanner.java
+
+C:\Users\Aumrudh\Documents>java FileScanner
+The integer read is:12
+The floating point read is:33.44
+The String read is:MEPCO
+Hi! Peter,the sum 12 + 33.44 is 45.44
+
+C:\Users\Aumrudh\Documents>cat in.txt
+12
+33.44
+MEPCO
+
+pgm3
+
+
+import java.util.Scanner;
+import java.io.*;
+class Conversion
+{
+ public static void main(String args[])throws IOException
+ {
+  Scanner in=new Scanner(System.in);
+  System.out.println("Enter characters: ");
+  String s=in.next();
+  String s1=s.toUpperCase();
+  FileOutputStream fout=new FileOutputStream("a1.txt");
+  byte b[]=s1.getBytes();
+  fout.write(b);
+  fout.close();
+ }
+}
+
+C:\Users\Aumrudh\Documents>javac Conversion.java
+
+C:\Users\Aumrudh\Documents>java Conversion
+Enter characters:
+aumrudh
+
+C:\Users\Aumrudh\Documents>cat a1.txt
+AUMRUDH
+
+
+pgm4
+
+
+import java.util.Scanner;
+import java.io.*;
+class Employee implements Serializable
+{
+ int empId;
+ String empName;
+ int empAge;
+ String empDept;
+ int empSal;
+
+ Employee(int no,String na,int a,String de,int sal)
+ {
+  empId=no;
+  empName=na;
+  empAge=a;
+  empDept=de;
+  empSal=sal;
+ }
+}
+ 
+public class Test
+{
+ public static void main(String args[])
+ {
+  try
+  {
+  Scanner in=new Scanner(System.in);
+  System.out.println("Enter employee details like id,name,age,dept,salary ");
+  int no=in.nextInt();
+  String na=in.next();
+  int a=in.nextInt();
+  String de=in.next();
+  int sal=in.nextInt();
+  Employee e1=new Employee(no,na,a,de,sal);
+  FileOutputStream f=new FileOutputStream("emp.txt");
+  ObjectOutputStream out=new ObjectOutputStream(f);
+  out.writeObject(e1);
+  FileInputStream f1=new FileInputStream("emp.txt");
+  ObjectInputStream ini=new ObjectInputStream(f1);
+  Employee e=(Employee)ini.readObject();
+  System.out.println("EmpId: "+e.empId+"\nEmpName: "+e.empName+"\nEmpAge: "
+    +e.empAge+"\nEmpDept: "+e.empDept+"\nEmpSal: "+e.empSal);
+  ini.close();
+  f1.close();
+  out.close();
+  f.close();
+  }
+  catch(Exception e)
+  {
+   System.out.println(e);
+  }
+ }
+}
+
+
+C:\Users\Aumrudh\Documents>javac Test.java
+
+C:\Users\Aumrudh\Documents>java Test
+Enter employee details like id,name,age,dept,salary
+34 aumrudh 18 IT 700000
+EmpId: 34
+EmpName: aumrudh
+EmpAge: 18
+EmpDept: IT
+EmpSal: 700000
+
+
+
+surpise pgm 
+
+import java.util.*;
+import java.io.*;
+class Test implements Serializable{
+    int no;
+    String s;
+    Test(int no,String s){
+        this.no=no;
+        this.s=s;
+    }
+    void display(){
+        System.out.print("\n"+no+"\t"+s+"\n");
+    }
+}
+
+public class Surprise{
+    public static void main(String args[]){
+        ArrayList<Test> l1 = new ArrayList<Test>();
+        ArrayList<String> l2 = new ArrayList<String>();
+        int count=0;
+        Test z;
+        try{
+            Scanner input=new Scanner(new File("a.txt"));
+            while(true){
+                String s=input.next();
+                l2.add(s);
+                int cc=countno(s);
+                Test x=new Test(cc,s);
+                l1.add(x);
+            }
+        }
+        catch(Exception e){
+            //System.out.print(e);
+        }
+        try{
+            FileOutputStream fout=new FileOutputStream("b.txt");
+            ObjectOutputStream l=new ObjectOutputStream(fout);
+            for(int i=0; i<l1.size(); i++){
+                z=l1.get(i);
+                l.writeObject(z);
+                z.display();
+            }
+        }
+        catch(Exception e){
+            //System.out.print(e);
+        }
+        Collections.sort(l2);
+        try{
+            FileOutputStream fout=new FileOutputStream("c.txt");
+            for(String s:l2){
+                byte b[]=s.getBytes();
+                fout.write(b);
+                String k=" ";
+                byte l[]=k.getBytes();
+                fout.write(l);
+            }
+        }
+        catch(Exception e){
+            //System.out.print(e);
+        }
+}
+
+    public  static int countno(String x){
+        int count=0;
+        try{
+            Scanner input2=new Scanner( new File("a.txt"));
+            while(true){
+                String temp=input2.next();
+                if(x.equals(temp)){
+                count+=1;
+            }
+        }
+    }
+    catch(Exception e){
+        //System.out.print(e);
+    }
+    return count;
+    }
+}
+
+C:\Users\Aumrudh\Documents\ex7_files>cat a.txt
+Welcome to Mepco Schlenk Enginneering College
+Welcome to IT Department
+C:\Users\Aumrudh\Documents\ex7_files>java Surprise
+
+2       Welcome
+
+2       to
+
+1       Mepco
+
+1       Schlenk
+
+1       Enginneering
+
+1       College
+
+2       Welcome
+
+2       to
+
+1       IT
+
+1       Department
+
+C:\Users\Aumrudh\Documents\ex7_files>cat c.txt
+College Department Enginneering IT Mepco Schlenk Welcome Welcome to to

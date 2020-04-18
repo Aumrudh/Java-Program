@@ -1,0 +1,278 @@
+
+
+//JAVA EX 8 - Generics
+//Programmed BY AUMRUDH LAL KUMAR TJ
+
+pgm1
+
+import java.util.*;
+import java.lang.Number.*;
+
+public class TestArith{
+    public static void main(String args[]){
+                Scanner ip= new Scanner(System.in);
+                System.out.print("\nEnter two integer values: ");
+                int n1 = ip.nextInt();
+                int n2 = ip.nextInt();
+				        ArrayList<Integer> intlist=new ArrayList<Integer>();
+				        intlist.add(n1);
+				        intlist.add(n2);
+                getSum(intlist);
+                getDiff(intlist);
+                getProd(intlist);
+
+				
+                System.out.print("\nEnter two float values: ");
+                float f1 = ip.nextFloat();
+                float f2 = ip.nextFloat();
+				        ArrayList<Float> floatlist=new ArrayList<Float>();
+				        floatlist.add(f1);
+				        floatlist.add(f2);
+                getSum(floatlist);
+                getDiff(floatlist);
+                getProd(floatlist);
+		}
+	 public static <E> void getSum(ArrayList<?extends Number> element){
+                  Number sum=0;
+	                for(Number i:elements){
+	                      sum=sum.doubleValue()+i.doubleValue();
+	                }
+                  System.out.println("The addition of two numbers is: "+sum);
+                  }
+	public static <E> void getProd(ArrayList<?extends Number> elements){
+       Number pro=1;
+	     for(Number i:elements){
+	       pro=pro.doubleValue()*i.doubleValue();
+	      }
+      System.out.println("The product between two numbers is: "+pro);
+    }
+	public static <E> void getDiff(ArrayList<?extends Number> elements){
+       double  diff=0.0;
+	     for(Number i:elements){
+	        diff=i.doubleValue()-diff;
+	   }
+         System.out.println("The difference between two numbers is: "+diff);
+    }
+}
+
+
+
+C:\Users\Aumrudh\Documents\java\arithmetic>java TestArith
+
+Enter two integer values: 5 10
+The addition of two numbers is: 15.0
+The difference between two numbers is: 5.0
+The product between two numbers is: 50.0
+
+Enter two float values: 5.5 10.5
+The addition of two numbers is: 16.0
+The difference between two numbers is: 5.0
+The product between two numbers is: 57.75
+
+----
+PGM 2
+
+
+import java.util.Scanner;
+class myGen<T extends Number>{
+    private T radius;
+    double vol,sur;
+    public double getVolume(T radi){
+    this.radius = radi;
+        vol = (4/3)*Math.PI*radius.doubleValue()*radius.doubleValue()*radius.doubleValue();
+        return vol;
+    }
+    public double getSurface(T radi){
+    this.radius = radius;
+        sur = 4*Math.PI*radius.doubleValue()*radius.doubleValue();
+        return sur;
+    }
+}
+
+public class Testsphere{
+    public static void main(String args[]){
+                Scanner ip= new Scanner(System.in);
+                myGen<Integer> integer= new myGen<>();
+                System.out.print("\nEnter radius in integer: ");
+                int r = ip.nextInt();
+                System.out.println("The volume of the sphere is: "+integer.getVolume(r));
+                System.out.println("The surface of the sphere is: "+integer.getSurface(r));
+                myGen<Number> floating= new  myGen<>();
+                System.out.print("\nEnter radius in float: ");
+                float f= ip.nextFloat();
+                System.out.println("The volume of the sphere is: "+floating.getVolume(f));
+                System.out.println("The surface of the sphere is: "+floating.getSurface(f));
+        }
+}
+
+
+C:\Users\Aumrudh\Documents\java\sphere>java Testsphere
+
+Enter radius in integer: 5
+The volume of the sphere is: 392.69908169872417
+The surface of the sphere is: 314.1592653589793
+
+Enter radius in float: 5.5
+The volume of the sphere is: 522.6824777410018
+The surface of the sphere is: 380.1327110843649
+
+
+
+
+pgm3
+
+
+import java.util.*;
+class Student{
+    
+    public static void calculate(List<? extends Number> list)    {
+        char grade;   
+        double s=0.0;
+    double avg;
+        for(Number n:list)        {
+            s+=n.doubleValue();
+        }
+        avg=s/5;
+        if(avg>90)
+            grade='A';
+        else if(avg>70)
+            grade='B';
+        else if(avg>50)
+            grade='C';
+        else
+            grade='D';
+    
+        System.out.println("Your Grade is:"+grade);
+    }
+}
+public class TestStudent{
+    public static void main(String args[])    {
+        Scanner ip= new Scanner(System.in);
+    System.out.println("Enter 5 marks:");
+        List<Integer>li=Arrays.asList(ip.nextInt(),ip.nextInt(),ip.nextInt(),ip.nextInt(),ip.nextInt());
+        Student s1=new Student();
+    s1.calculate(li);
+        
+    }
+}
+
+C:\Users\Aumrudh\Documents\java\stud>java TestStudent
+Enter 5 marks:
+100 100 100 100 100
+Your Grade is:A
+
+C:\Users\Aumrudh\Documents\java\stud>java TestStudent
+Enter 5 marks:
+70 70 70 70 70
+Your Grade is:C
+
+
+pgm4
+
+
+import java.util.*;
+class Stulist<T>{
+  List<T> li=new LinkedList<>();
+    public void addBeg(T a){
+    li.add(0,a);
+   }
+  public void addLaast(T a){
+    li.add(a);
+  }
+  public void addMid(T a){
+     li.add(li.size()/2,a);
+  }
+   public void remove(T a){
+      li.remove(a);
+  }
+  public void print(){
+    for(T i:li){    {
+      System.out.println(i);
+    }
+  }
+ }
+ public class Stutest{
+   public static void main(String args[]){
+   Scanner ip=new Scanner(System.in);
+   Stulist<Integer> s=new Stulist<Integer>();
+   int ch,a;
+   while(true){
+     System.out.println("Enter your Choice"); 
+     System.out.println("1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print");
+   ch=ip.nextInt();
+   
+    if(ch==1){
+            System.out.println("Enter a number:");
+            s.addBeg(ip.nextInt());
+  }
+   
+    if(ch==2){
+            System.out.println("Enter a number:");
+            s.addLaast(ip.nextInt());
+        }
+    if(ch==3){
+            System.out.println("Enter a number:");
+           s.addMid(ip.nextInt());
+  }
+     if(ch==4){
+            System.out.println("Enter a number:");
+            s.remove(ip.nextInt());
+  }
+    if(ch==5){
+            System.out.println("List:"); 
+            s.print();
+  
+  }   
+}
+
+} 
+ }
+
+C:\Users\Aumrudh\Documents\java\student>java Stutest
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+1
+Enter a number:
+5
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+1
+Enter a number:
+3
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+2
+Enter a number:
+25
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+5
+List:
+3
+5
+25
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+3
+Enter a number:
+555
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+5
+List:
+3
+555
+5
+25
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+4
+Enter a number:
+555
+Enter your Choice
+1-Add First  2-Add last 3-Add Middle 4-Remove 5-Print
+5
+List:
+3
+5
+25

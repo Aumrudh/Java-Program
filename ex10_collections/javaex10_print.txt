@@ -1,0 +1,605 @@
+//Ex 10 - Collection
+//Programmed BY AUMRUDH LAL KUMAR TJ
+
+
+Pgm1 - ArrayList
+import java.util.*;
+public class TestArray{
+/** This program demonstrate use of some methods of Arraylist class
+@author aumrudh
+@since 2020/03/08
+*/
+        public static void main(String args[]){
+                ArrayList<String> cl=new ArrayList<String>();
+                Scanner ip=new Scanner(System.in);
+                while(true){
+                        System.out.print("\n1-Add color\n2- Iterate\n
+                        3-Retrieve an element at given position\n4-Copy to another\n
+                        5-Join two ArrayList\nEnter your Choice : ");
+                        int ch=ip.nextInt();
+                        if(ch==1){
+                                System.out.print("\nEnter color name : ");
+                                String stem=ip.next();
+                                cl.add(stem);
+                        }
+                        else if(ch==2){
+                                Iterator<String> i=cl.iterator();
+                                System.out.println("Printing Names\n");
+                                while(i.hasNext()){
+                                        System.out.println(i.next());
+                                }
+                        }
+                        else if(ch==3){
+                                System.out.print("Enter position : ");
+                                int ind =ip.nextInt();
+                                String st=cl.get(ind);
+                                System.out.println(st);
+                        }
+                        else if(ch==4){
+                                ArrayList cl1=new ArrayList();
+                                cl1=(ArrayList)cl.clone();
+                                System.out.println("First array : "+cl);
+                                System.out.println("Copied array : "+cl1);      
+                        }
+                        else if(ch==5){
+                                ArrayList<String> cl2=new ArrayList<String>();
+                                cl2.add("White");
+                                System.out.println("Array 2 Before join : "+cl2);
+                                cl2.addAll(cl);                                
+                                System.out.println("Array 1 : "+cl);
+                                System.out.println("Joined List : "+cl2);
+                        }
+                        else{
+                        	System.out.println("Wrong Choice");
+                                break;
+                        }
+                }
+        }
+}
+
+output
+
+D:\recent\ex10 java>javac TestArray.java
+
+D:\recent\ex10 java>java TestArray
+
+1-Add color
+2- Iterate
+3-Retrieve an element at given position
+4-Copy to another
+5-Join two ArrayList
+Enter your Choice : 1
+
+Enter color name : red
+
+1-Add color
+2- Iterate
+3-Retrieve an element at given position
+4-Copy to another
+5-Join two ArrayList
+Enter your Choice : 1
+
+Enter color name : blue
+
+1-Add color
+2- Iterate
+3-Retrieve an element at given position
+4-Copy to another
+5-Join two ArrayList
+Enter your Choice : 2
+Printing Names
+
+red
+blue
+
+1-Add color
+2- Iterate
+3-Retrieve an element at given position
+4-Copy to another
+5-Join two ArrayList
+Enter your Choice : 3
+Enter position : 1
+blue
+
+1-Add color
+2- Iterate
+3-Retrieve an element at given position
+4-Copy to another
+5-Join two ArrayList
+Enter your Choice : 4
+First array : [red, blue]
+Copied array : [red, blue]
+
+1-Add color
+2- Iterate
+3-Retrieve an element at given position
+4-Copy to another
+5-Join two ArrayList
+Enter your Choice : 5
+Array 2 Before join : [White]
+Array 1 : [red, blue]
+Joined List : [White, red, blue]
+
+1-Add color
+2- Iterate
+3-Retrieve an element at given position
+4-Copy to another
+5-Join two ArrayList
+Enter your Choice : 6
+Wrong Choice
+
+
+pgm2 - Linked List
+
+
+import java.util.*;
+public class TestLinked{
+/** This program demonstrate use of some methods of Linkedlist class
+@author aumrudh
+@since 2020/03/08
+*/
+        public static void main(String args[]){
+                LinkedList<Integer> obj=new LinkedList<Integer>();
+                Scanner ip=new Scanner(System.in);
+                while(true){
+                        System.out.print("\n1-Add Last\n2-Print\n
+                        3-Iterate in reverse order\n4-Get first and last occurance of Specified element\n
+                        5-Shuffle elements\nEnter your Choice : ");
+                        int ch=ip.nextInt();
+                        if(ch==1){
+                                System.out.print("\nEnter a number : ");
+                                int stem=ip.nextInt();
+                                obj.addLast(stem);
+                        }
+                         else if(ch==2){
+                                System.out.println("List is "+obj);
+                        }
+                        else if(ch==3){
+                                Iterator<Integer> i=obj.descendingIterator();
+                                System.out.println("Printing in reverse order\n");
+                                while(i.hasNext()){
+                                        System.out.println(i.next());
+                                }
+                        }
+                        else if(ch==4){
+                                System.out.print("Enter element for which first 
+                                and last occurance should be found : ");
+                                int a=ip.nextInt();
+                                System.out.println("Index of first occurance of 
+                                "+a+" is : "+obj.indexOf(a));
+                                System.out.println("Index of Last occurance of 
+                                "+a+" is : "+obj.lastIndexOf(a));
+                        }
+                        else if(ch==5){
+                                System.out.println("Origianl List : "+obj);
+                                Collections.shuffle(obj);                               
+                                System.out.println("Shuffled List : "+obj);
+                        }
+                        else{
+                        	System.out.println("Wrong Choice");
+                                break;
+                        }
+                }
+        }
+}
+
+
+output
+
+D:\recent\ex10 java>javac TestLinked.java
+
+D:\recent\ex10 java>java TestLinked
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 1
+
+Enter a number : 25
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 1
+
+Enter a number : 34
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 2
+List is [25, 34]
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 3
+Printing in reverse order
+
+34
+25
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 1
+
+Enter a number : 25
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 4
+Enter element for which first and last occurance should be found : 25
+Index of first occurance of 25 is : 0
+Index of Last occurance of 25 is : 2
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 5
+Origianl List : [25, 34, 25]
+Shuffled List : [34, 25, 25]
+
+1-Add Last
+2-Print
+3-Iterate in reverse order
+4-Get first and last occurance of Specified element
+5-Shuffle elements
+Enter your Choice : 6
+Wrong Choice
+
+
+
+pgm3 -hash set
+
+
+import java.util.*;
+public class TestHash{
+/** This program demonstrate use of some methods of HashSet class
+@author aumrudh
+@since 2020/03/08
+*/
+        public static void main(String args[]){
+                HashSet<String> obj=new HashSet<String>();
+                obj.add("Rohit");
+                Scanner ip=new Scanner(System.in);
+                while(true){
+                        System.out.print("\n1-Add Last\n2-Print\n3-Convert To array\n
+                        4-Compare and retain same element\n5-Remove all elements\n
+                        Enter your Choice : ");
+                        int ch=ip.nextInt();
+                        if(ch==1){
+                                System.out.print("\nEnter cricket player name : ");
+                                String stem=ip.next();
+                                obj.add(stem);
+                        }
+                        else if(ch==2){
+                                Iterator<String> i=obj.iterator();
+                                System.out.println("Printing Names\n");
+                                while(i.hasNext()){
+                                        System.out.println(i.next());
+                                }
+                        }
+                        else if(ch==3){
+                                Object[] arr=obj.toArray();
+                                System.out.println("Printing Array");
+                                for(int i=0;i<arr.length;i++){
+                                        System.out.println(arr[i]);
+                                }
+                        }
+                        else if(ch==4){
+                                HashSet<String> obj1=new HashSet<String>();
+                                obj1.add("India");
+                                obj1.add("Rohit");
+                                obj.retainAll(obj1);
+                                System.out.println("Retained same elements :"+obj);
+                        }
+                        else if(ch==5){
+                                System.out.println("Origianl HashSet : "+obj);
+                                obj.removeAll(obj);                               
+                                System.out.println("Removed All elements");
+                        }
+                        else{
+                        	System.out.println("Wrong Choice");
+                                break;
+                        }
+                }
+        }
+}
+
+
+output
+
+D:\recent\ex10 java>javac TestHash.java
+
+D:\recent\ex10 java>java TestHash
+
+1-Add Last
+2-Print
+3-Convert To array
+4-Compare and retain same element
+5-Remove all elements
+Enter your Choice : 1
+
+Enter cricket player name : virat
+
+1-Add Last
+2-Print
+3-Convert To array
+4-Compare and retain same element
+5-Remove all elements
+Enter your Choice : 2
+Printing Names
+
+Rohit
+virat
+
+1-Add Last
+2-Print
+3-Convert To array
+4-Compare and retain same element
+5-Remove all elements
+Enter your Choice : 3
+Printing Array
+Rohit
+virat
+
+1-Add Last
+2-Print
+3-Convert To array
+4-Compare and retain same element
+5-Remove all elements
+Enter your Choice : 4
+Retained same elements :[Rohit]
+
+1-Add Last
+2-Print
+3-Convert To array
+4-Compare and retain same element
+5-Remove all elements
+Enter your Choice : 5
+Origianl HashSet : [Rohit]
+Removed All elements
+
+1-Add Last
+2-Print
+3-Convert To array
+4-Compare and retain same element
+5-Remove all elements
+Enter your Choice : 2
+Printing Names
+
+
+1-Add Last
+2-Print
+3-Convert To array
+4-Compare and retain same element
+5-Remove all elements
+Enter your Choice : 6
+Wrong Choice
+
+
+pgm4-Treeset
+
+import java.util.*;
+public class TestTree{
+/** This program demonstrate use of some methods of Treeset class
+@author aumrudh
+@since 2020/03/08
+*/
+        public static void main(String args[]){
+                TreeSet<String> obj=new TreeSet<String>();
+                Scanner ip=new Scanner(System.in);
+                while(true){
+                        System.out.print("\n1-Add\n2- Iterate\n3-Add all to another TreeSet
+                        \n4-Get element greater than or equal to given element\n
+                        5-Retrive and remove first element\nEnter your Choice : ");
+                        int ch=ip.nextInt();
+                        if(ch==1){
+                                System.out.print("\nEnter color name : ");
+                                String stem=ip.next();
+                                obj.add(stem);
+                        }
+                        else if(ch==2){
+                                Iterator<String> i=obj.iterator();
+                                System.out.println("Printing Names\n");
+                                while(i.hasNext()){
+                                        System.out.println(i.next());
+                                }
+                        }
+                        else if(ch==3){
+                                TreeSet<String> obj1=new TreeSet<String>();
+                                obj1.add("Black");
+                                obj1.addAll(obj);
+                                System.out.println("\nTreeSet 2 : " +obj1);
+                        }
+                        else if(ch==4){
+                                System.out.print("Enter a color : ");
+                                String temp=ip.next();
+                                System.out.println(obj.ceiling(temp)+" : is greater than or 
+                                equal to "+temp);      
+                        }
+                        else if(ch==5){
+                                System.out.println("TreeSet : "+obj);
+                                System.out.println("First Element is  : "+obj.pollFirst());
+                                System.out.println("Removed First Element\n"+obj);
+                        }
+                        else{
+                        	System.out.println("Wrong Choice");
+                            break;
+                        }
+                }
+        }
+}
+
+output
+
+
+D:\recent\ex10 java>java TestTree
+
+1-Add
+2- Iterate
+3-Add all to another TreeSet
+4-Get element greater than or equal to given element
+5-Retrive and remove first element
+Enter your Choice : 1
+
+Enter color name : white
+
+1-Add
+2- Iterate
+3-Add all to another TreeSet
+4-Get element greater than or equal to given element
+5-Retrive and remove first element
+Enter your Choice : 1
+
+Enter color name : blue
+
+1-Add
+2- Iterate
+3-Add all to another TreeSet
+4-Get element greater than or equal to given element
+5-Retrive and remove first element
+Enter yourChoice : 2
+Printing Names
+
+blue
+white
+
+1-Add
+2- Iterate
+3-Add all to another TreeSet
+4-Get element greater than or equal to given element
+5-Retrive and remove first element
+Enter your Choice : 3
+
+TreeSet 2 : [Black, blue, white]
+
+1-Add
+2- Iterate
+3-Add all to another TreeSet
+4-Get element greater than or equal to given element
+5-Retrive and remove first element
+Enter your Choice : 4
+Enter a color : red
+white is greater than or equal to : red
+
+1-Add
+2- Iterate
+3-Add all to another TreeSet
+4-Get element greater than or equal to given element
+5-Retrive and remove first element
+Enter your Choice : 5
+TreeSet : [blue, white]
+First Element is  : blue
+Removed First Element
+[white]
+
+1-Add
+2- Iterate
+3-Add all to another TreeSet
+4-Get element greater than or equal to given element
+5-Retrive and remove first element
+Enter your Choice : 6
+Wrong Choice4
+
+//surpirse collection
+
+import java.util.*;
+public class Surprise{
+    public static <E extends Comparable<E>> void sortArray(E[] element){
+        for(int i=0;i<element.length;i++){
+            for(int j=0;j<i;j++){
+                if(element[i].compareTo(element[j])<0){
+                    E temp=element[i];
+                    element[i]=element[j];
+                    element[j]=temp;
+                }
+            }
+        }
+        for(E elements : element){
+            System.out.println(elements);
+        }
+    }
+    public static void main(String args[]){
+        Scanner ip=new Scanner(System.in);
+        System.out.print("Enter n value : ");
+        int n=ip.nextInt();
+        System.out.print("1-Integer\n2-Float\n3-Character\nEnter Choice :");
+        int ch=ip.nextInt();
+        if(ch==1){
+            Integer[] iA=new Integer[n];
+            System.out.print("Enter the numbers : ");
+            for(int i=0;i<n;i++){
+                iA[i]=ip.nextInt();
+            }
+            sortArray(iA);
+        }
+        
+        Character[] cA=new Character[n];
+        Float[] fA=new Float[n];
+        if(ch==2){
+            System.out.print("Enter the numbers : ");
+            for(int i=0;i<n;i++){
+                fA[i]=ip.nextFloat();
+            }
+            sortArray(fA);
+        }
+        if(ch==3){
+            System.out.print("Enter the characters : ");
+            for(int i=0;i<n;i++){
+                cA[i]=ip.next().charAt(0);
+            }
+            sortArray(cA);
+        }
+
+    }
+}
+
+
+
+//surprise
+
+import java.util.*;
+public class Surprise{
+    public static void main(String args[]){
+        Scanner ip = new Scanner(System.in);
+        System.out.print("Enter number of lines of input : ");
+        int n=ip.nextInt();
+        ArrayList<Integer>[] al = new ArrayList[n]; 
+        for(int i=0;i<n;i++){
+            al[i] = new ArrayList<Integer>();
+        }
+        for(int i=0;i<n;i++){
+            System.out.print("Enter value : ");
+            int no=ip.nextInt();
+            for(int j=0;j<no;j++){
+                    int val=ip.nextInt();
+                    al[i].add(val);
+            }
+        }
+        for(int i=0;i<n;i++){
+            System.out.print(al[i]);
+        }
+        System.out.print("Enter list and position");
+        int l=ip.nextInt();
+        int pos=ip.nextInt();
+        int ans=al[l].get(pos);
+        System.out.print(ans);
+    }
+}
